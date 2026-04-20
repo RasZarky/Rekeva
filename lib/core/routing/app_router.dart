@@ -7,6 +7,10 @@ import '../../features/booking/view/shop_list_screen.dart';
 import '../../features/booking/view/checkout_screen.dart';
 import '../../features/booking/view/confirmation_screen.dart';
 import '../../features/booking/view/health_report_screen.dart';
+import '../../features/booking/view/door_jamb_scan_screen.dart';
+import '../../features/booking/view/vehicle_confirmation_screen.dart';
+import '../../features/booking/view/scan_failed_screen.dart';
+import '../../features/booking/view/scan_tips_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -20,6 +24,10 @@ class AppRouter {
       GoRoute(path: '/checkout', builder: (context, state) => const CheckoutScreen()),
       GoRoute(path: '/confirmation', builder: (context, state) => const ConfirmationScreen()),
       GoRoute(path: '/health', builder: (context, state) => const HealthReportScreen()),
+      GoRoute(path: '/door-jamb-scan', builder: (context, state) => const DoorJambScanScreen()),
+      GoRoute(path: '/vehicle-confirmation', builder: (context, state) => const VehicleConfirmationScreen()),
+      GoRoute(path: '/scan-failed', builder: (context, state) => const ScanFailedScreen()),
+      GoRoute(path: '/scan-tips', builder: (context, state) => const ScanTipsScreen()),
     ],
   );
 }

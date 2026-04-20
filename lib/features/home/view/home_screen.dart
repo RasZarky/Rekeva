@@ -143,8 +143,7 @@ class _ScanDoorJambCardState extends State<_ScanDoorJambCard>
       color: AppColors.primaryGlow,
       border: Border.all(color: const Color(0x3822C55E), width: 1.5),
       onTap: () {
-        context.read<BookingBloc>().setVehicle('Toyota RAV4');
-        context.push('/service-select');
+        context.push('/door-jamb-scan');
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
