@@ -15,7 +15,7 @@ class RekevaCard extends StatelessWidget {
     this.color,
     this.border,
     this.onTap,
-    this.padding = const EdgeInsets.all(16),
+    this.padding = const EdgeInsets.all(0),
   });
 
   @override
