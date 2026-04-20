@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/primary_button.dart';
 import '../../splash/widgets/logo_widget.dart';
+import '../widgets/onboarding_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -39,12 +39,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   children: [
-                    _OnboardingPage(
-                      icon: const LogoWidget(),
+                    const OnboardingPage(
+                      icon: LogoWidget(),
                       title: 'Tires.\nDone.',
                       description: 'Find a shop. Book a slot.\nDrive safe.',
                     ),
-                    _OnboardingPage(
+                    OnboardingPage(
                       icon: Container(
                         width: 80,
                         height: 80,
@@ -113,49 +113,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _OnboardingPage extends StatelessWidget {
-  final Widget icon;
-  final String title;
-  final String description;
-
-  const _OnboardingPage({
-    required this.icon,
-    required this.title,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        icon,
-        const SizedBox(height: 40),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontFamily: AppTextStyles.fontFamilySyne,
-            fontSize: 40,
-            fontWeight: FontWeight.w800,
-            height: 1.05,
-            letterSpacing: -1.5,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          description,
-          textAlign: TextAlign.center,
-          style: AppTextStyles.subheadline.copyWith(
-            fontSize: 15,
-            height: 1.7,
-          ),
-        ),
-      ],
     );
   }
 }

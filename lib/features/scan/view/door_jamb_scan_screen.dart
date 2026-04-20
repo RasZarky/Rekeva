@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
 
 class DoorJambScanScreen extends StatefulWidget {
   const DoorJambScanScreen({super.key});
@@ -30,7 +31,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
   void initState() {
     super.initState();
     
-    // Scanning line animation
     _scanningController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -39,7 +39,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
       CurvedAnimation(parent: _scanningController, curve: Curves.easeInOut),
     );
 
-    // Bottom sheet loading animation
     _loadingController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
@@ -61,8 +60,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
       if (mounted) {
         setState(() {
           _showBottomSheet = true;
-          // In a real app, this logic would depend on actual detection results.
-          // Toggling _scanFailed to false for default success behavior.
           _scanFailed = false; 
           if (!_scanFailed) {
             _loadingController.forward();
@@ -128,7 +125,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
       backgroundColor: CupertinoColors.black,
       child: Stack(
         children: [
-          // Camera Preview
           if (_isPermissionGranted && _cameraController != null && _cameraController!.value.isInitialized)
             SizedBox.expand(
               child: CameraPreview(_cameraController!),
@@ -150,7 +146,20 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
               ),
             ),
 
-          // Top Controls
+          if (!_showBottomSheet)
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.3,
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.6,
+            bottom: MediaQuery.of(context).size.height * 0.2,
+            child: Container(
+              decoration: BoxDecoration(
+                color: CupertinoColors.black.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -176,7 +185,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
                       if (_scanFailed) {
                         _toggleTorch();
                       } else {
-                        // Manual trigger for failure state demo
                         setState(() {
                           _showBottomSheet = true;
                           _scanFailed = true;
@@ -205,7 +213,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
             ),
           ),
 
-          // Instructions
           Positioned(
             top: 110,
             left: 0,
@@ -225,7 +232,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
             ),
           ),
 
-          // Helper Diagram
           Positioned(
             top: 160,
             right: 20,
@@ -268,7 +274,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
             ),
           ),
 
-          // Viewfinder
           Center(
             child: Container(
               width: 220,
@@ -277,13 +282,11 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Corner markers
                   _CornerMarker(top: 0, left: 0, color: statusColor),
                   _CornerMarker(top: 0, right: 0, isRight: true, color: statusColor),
                   _CornerMarker(bottom: 0, left: 0, isBottom: true, color: statusColor),
                   _CornerMarker(bottom: 0, right: 0, isBottom: true, isRight: true, color: statusColor),
 
-                  // Scanning line animation
                   if (!_showBottomSheet)
                     AnimatedBuilder(
                       animation: _scanningAnimation,
@@ -324,7 +327,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
             ),
           ),
 
-          // Bottom Confirmation Sheet
           if (_showBottomSheet)
             Positioned(
               bottom: 0,
@@ -480,7 +482,6 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
         const SizedBox(height: 8),
         GestureDetector(
           onTap: () {
-            // TODO: Implement manual VIN entry navigation
           },
           child: Container(
             width: double.infinity,

@@ -6,14 +6,18 @@ import '../../features/booking/view/service_select_screen.dart';
 import '../../features/booking/view/shop_list_screen.dart';
 import '../../features/booking/view/checkout_screen.dart';
 import '../../features/booking/view/confirmation_screen.dart';
-import '../../features/booking/view/health_report_screen.dart';
-import '../../features/booking/view/door_jamb_scan_screen.dart';
-import '../../features/booking/view/vehicle_confirmation_screen.dart';
-import '../../features/booking/view/scan_failed_screen.dart';
-import '../../features/booking/view/scan_tips_screen.dart';
+import '../../features/vehicle/view/health_report_screen.dart';
+import '../../features/scan/view/door_jamb_scan_screen.dart';
+import '../../features/vehicle/view/vehicle_confirmation_screen.dart';
+import '../../features/scan/view/scan_failed_screen.dart';
+import '../../features/scan/view/scan_tips_screen.dart';
+import '../../features/search/view/vehicle_search_screen.dart';
+import '../../features/search/view/complex_vehicle_selection_screen.dart';
+import '../../features/search/view/luxury_handoff_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
+    debugLogDiagnostics: true,
     initialLocation: '/',
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
@@ -28,6 +32,19 @@ class AppRouter {
       GoRoute(path: '/vehicle-confirmation', builder: (context, state) => const VehicleConfirmationScreen()),
       GoRoute(path: '/scan-failed', builder: (context, state) => const ScanFailedScreen()),
       GoRoute(path: '/scan-tips', builder: (context, state) => const ScanTipsScreen()),
+      GoRoute(path: '/vehicle-search', builder: (context, state) => const VehicleSearchScreen()),
+      GoRoute(
+        path: '/complex-vehicle-selection',
+        builder: (context, state) => ComplexVehicleSelectionScreen(
+          vehicle: state.extra as Map<String, dynamic>,
+        ),
+      ),
+      GoRoute(
+        path: '/luxury-handoff',
+        builder: (context, state) => LuxuryHandoffScreen(
+          vehicle: state.extra as Map<String, dynamic>,
+        ),
+      ),
     ],
   );
 }

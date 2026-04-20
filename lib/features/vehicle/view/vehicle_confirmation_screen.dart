@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/primary_button.dart';
-import '../bloc/booking_bloc.dart';
+import '../../booking/bloc/booking_bloc.dart';
 
 class VehicleConfirmationScreen extends StatelessWidget {
   const VehicleConfirmationScreen({super.key});
