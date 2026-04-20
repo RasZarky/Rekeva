@@ -3,9 +3,24 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/primary_button.dart';
+import '../../splash/widgets/logo_widget.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,30 +31,131 @@ class OnboardingScreen extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
                   children: [
-                    Container(
-                      width: 80, height: 80,
-                      decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(24)),
-                      child: const Icon(CupertinoIcons.checkmark_seal_fill, size: 40, color: CupertinoColors.black),
+                    _OnboardingPage(
+                      icon: const LogoWidget(),
+                      title: 'Tires.\nDone.',
+                      description: 'Find a shop. Book a slot.\nDrive safe.',
                     ),
-                    const SizedBox(height: 48),
-                    const Text('Tires.\nDone.', textAlign: TextAlign.center, style: TextStyle(fontSize: 52, fontWeight: FontWeight.w900, height: 1.0)),
-                    const SizedBox(height: 20),
-                    const Text('Find a shop. Book a slot.\nDrive safe.', textAlign: TextAlign.center, style: AppTextStyles.subheadline),
+                    _OnboardingPage(
+                      icon: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: AppColors.surface,
+                          border: Border.all(color: AppColors.border),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '🔒',
+                            style: TextStyle(fontSize: 36),
+                          ),
+                        ),
+                      ),
+                      title: 'Your money is safe\nuntil the job\nis done.',
+                      description:
+                          'We hold your payment in escrow. The shop gets paid only when you drive away happy.',
+                    ),
                   ],
                 ),
               ),
-              PrimaryButton(text: 'Next →', onPressed: () => context.go('/home')),
+              // Page Indicators
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(2, (index) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                    height: 5,
+                    width: _currentPage == index ? 24 : 5,
+                    decoration: BoxDecoration(
+                      color: _currentPage == index
+                          ? AppColors.primary
+                          : AppColors.textPrimary.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(99),
+                    ),
+                  );
+                }),
+              ),
+              const SizedBox(height: 28),
+              PrimaryButton(
+                text: _currentPage == 0 ? 'Next →' : 'Let\'s go →',
+                onPressed: () {
+                  if (_currentPage == 0) {
+                    _pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  } else {
+                    context.go('/home');
+                  }
+                },
+              ),
               CupertinoButton(
-                child: const Text('Skip', style: TextStyle(color: AppColors.textMuted, decoration: TextDecoration.underline)),
+                child: const Text(
+                  'Skip',
+                  style: TextStyle(
+                    color: AppColors.textMuted,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
                 onPressed: () => context.go('/home'),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _OnboardingPage extends StatelessWidget {
+  final Widget icon;
+  final String title;
+  final String description;
+
+  const _OnboardingPage({
+    required this.icon,
+    required this.title,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        icon,
+        const SizedBox(height: 40),
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontFamily: AppTextStyles.fontFamilySyne,
+            fontSize: 40,
+            fontWeight: FontWeight.w800,
+            height: 1.05,
+            letterSpacing: -1.5,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          description,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.subheadline.copyWith(
+            fontSize: 15,
+            height: 1.7,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -38,29 +38,26 @@ class _PulsatingDotState extends State<PulsatingDot> with SingleTickerProviderSt
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Transform.scale(
-          scale: 0.8 + (_animation.value * 0.4),
-          child: Opacity(
-            opacity: 0.6 + (_animation.value * 0.4),
-            child: Container(
-              width: widget.size,
-              height: widget.size,
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: CupertinoColors.black,
-                  width: 2.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.4 * _animation.value),
-                    blurRadius: 8,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+        final scaleValue = 0.8 + (_animation.value * 0.4);
+        final opacityValue = 0.6 + (_animation.value * 0.4);
+        
+        return Container(
+          width: widget.size * scaleValue,
+          height: widget.size * scaleValue,
+          decoration: BoxDecoration(
+            color: AppColors.primary.withValues(alpha: opacityValue),
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: CupertinoColors.black,
+              width: 2.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.4 * _animation.value),
+                blurRadius: 8,
+                spreadRadius: 1,
+              ),
+            ],
           ),
         );
       },
