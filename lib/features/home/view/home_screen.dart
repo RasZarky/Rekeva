@@ -120,39 +120,61 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       },
                     ),
-                    if (_showSeasonalOptions) ...[
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () => context.push('/door-jamb-scan'),
-                              child: const _DemoOptionBox(
-                                title: 'First-time user',
-                                description: 'Camera → vehicle sacn → pre-selected',
-                              ),
-                            ),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (Widget child, Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: SizeTransition(
+                            sizeFactor: animation,
+                            axisAlignment: -1.0,
+                            child: child,
                           ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () => context.push('/returning-summary'),
-                              child: const _DemoOptionBox(
-                                title: 'Returning user',
-                                description: 'Skips to pre-filled booking summary',
+                        );
+                      },
+                      child: _showSeasonalOptions
+                          ? Padding(
+                              key: const ValueKey('seasonal_options'),
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => context.push('/door-jamb-scan'),
+                                      child: const _DemoOptionBox(
+                                        title: 'First-time user',
+                                        description: 'Camera → vehicle scan → pre-selected',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () => context.push('/returning-summary'),
+                                      child: const _DemoOptionBox(
+                                        title: 'Returning user',
+                                        description: 'Skips to pre-filled booking summary',
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            )
+                          : const SizedBox.shrink(key: ValueKey('seasonal_empty')),
+                    ),
                     const SizedBox(height: 24),
-                    const Center(
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        'No account needed. Your data stays private',
-                        style: AppTextStyles.subheadline,
-                      ),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: _showSeasonalOptions
+                          ? const SizedBox.shrink(key: ValueKey('privacy_hidden'))
+                          : const Center(
+                              key: ValueKey('privacy_text'),
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                'No account needed. Your data stays private',
+                                style: AppTextStyles.subheadline,
+                              ),
+                            ),
                     ),
                   ],
                 ),
