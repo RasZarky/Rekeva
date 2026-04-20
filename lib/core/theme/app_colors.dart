@@ -1,20 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppColors {
-  // Common Colors
-  static const Color primary = Colors.deepPurple;
-  static const Color secondary = Colors.deepPurpleAccent;
-  static const Color error = Color(0xFFB00020);
-
-  // Light Theme Colors
-  static const Color backgroundLight = Color(0xFFF5F5F5);
-  static const Color surfaceLight = Colors.white;
-  static const Color textPrimaryLight = Color(0xFF000000);
-  static const Color textSecondaryLight = Color(0xFF757575);
-
-  // Dark Theme Colors
-  static const Color backgroundDark = Color(0xFF121212);
-  static const Color surfaceDark = Color(0xFF1E1E1E);
-  static const Color textPrimaryDark = Color(0xFFFFFFFF);
-  static const Color textSecondaryDark = Color(0xFFB0B0B0);
+  static const Color primary = Color(0xFF22C55E); // Rekeva Green
+  static const Color primaryGlow = Color(0x3322C55E);
+  static const Color background = Color(0xFF0C0C0C);
+  static const Color surface = Color(0xFF161616);
+  static const Color surfaceLight = Color(0xFF1E1E1E);
+  static const Color border = Color(0x12FFFFFF);
+  static const Color textPrimary = CupertinoColors.white;
+  static const Color textSecondary = Color(0x99FFFFFF);
+  static const Color textMuted = Color(0x4DFFFFFF);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color error = Color(0xFFEF4444);
 }
