@@ -10,18 +10,20 @@ class LogoWidget extends StatelessWidget {
     return Hero(
       tag: 'logo_box',
       child: Container(
-        width: size, height: size,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primaryGlow.withValues(alpha: 0.6), 
+              color: AppColors.primaryGlow.withValues(alpha: 0.6),
               blurRadius: 60,
             ),
           ],
         ),
-        child: Icon(CupertinoIcons.circle_grid_hex, size: size * 0.47, color: CupertinoColors.black),
+        child: Image.asset(
+          'assets/images/logo.png',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
