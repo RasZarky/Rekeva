@@ -7,8 +7,15 @@ import '../widgets/scan_door_jamb_card.dart';
 import '../widgets/bottom_tab_mock.dart';
 import '../widgets/seasonal_banner.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _showSeasonalOptions = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +49,22 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            // TODO: Implement sign in logic
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 14,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.surfaceLight,
-                              borderRadius: BorderRadius.circular(99),
-                              border: Border.all(color: AppColors.border),
-                            ),
-                            child: const Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: AppColors.textSecondary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.surfaceLight,
+                            borderRadius: BorderRadius.circular(99),
+                            border: Border.all(color: AppColors.border),
+                          ),
+                          child: const Text(
+                            'Sign in',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -110,8 +112,41 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 28),
-                    const SeasonalBanner(),
-                    const SizedBox(height: 14),
+                    SeasonalBanner(
+                      isActive: _showSeasonalOptions,
+                      onTap: () {
+                        setState(() {
+                          _showSeasonalOptions = !_showSeasonalOptions;
+                        });
+                      },
+                    ),
+                    if (_showSeasonalOptions) ...[
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => context.push('/door-jamb-scan'),
+                              child: const _DemoOptionBox(
+                                title: 'First-time user',
+                                description: 'Camera → vehicle sacn → pre-selected',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => context.push('/returning-summary'),
+                              child: const _DemoOptionBox(
+                                title: 'Returning user',
+                                description: 'Skips to pre-filled booking summary',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                    const SizedBox(height: 24),
                     const Center(
                       child: Text(
                         textAlign: TextAlign.center,
@@ -126,6 +161,46 @@ class HomeScreen extends StatelessWidget {
             const BottomTabMock(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _DemoOptionBox extends StatelessWidget {
+  final String title;
+  final String description;
+
+  const _DemoOptionBox({required this.title, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1A),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: AppColors.textMuted,
+              fontSize: 11,
+            ),
+          ),
+        ],
       ),
     );
   }

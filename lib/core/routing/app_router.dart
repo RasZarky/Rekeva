@@ -14,6 +14,7 @@ import '../../features/scan/view/scan_tips_screen.dart';
 import '../../features/search/view/vehicle_search_screen.dart';
 import '../../features/search/view/complex_vehicle_selection_screen.dart';
 import '../../features/search/view/luxury_handoff_screen.dart';
+import '../../features/booking/view/returning_summary_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -33,6 +34,7 @@ class AppRouter {
       GoRoute(path: '/scan-failed', builder: (context, state) => const ScanFailedScreen()),
       GoRoute(path: '/scan-tips', builder: (context, state) => const ScanTipsScreen()),
       GoRoute(path: '/vehicle-search', builder: (context, state) => const VehicleSearchScreen()),
+      GoRoute(path: '/returning-summary', builder: (context, state) => const ReturningSummaryScreen()),
       GoRoute(
         path: '/complex-vehicle-selection',
         builder: (context, state) => ComplexVehicleSelectionScreen(
