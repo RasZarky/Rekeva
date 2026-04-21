@@ -481,8 +481,7 @@ class _DoorJambScanScreenState extends State<DoorJambScanScreen> with TickerProv
         ),
         const SizedBox(height: 8),
         GestureDetector(
-          onTap: () {
-          },
+          onTap: () => context.push('/vin-entry'),
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 13),

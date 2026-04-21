@@ -86,9 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: HomeActionTile(
                             icon: '🔢',
                             label: 'Enter VIN',
-                            onTap: () {
-                              // VIN entry logic
-                            },
+                            onTap: () => context.push('/door-jamb-scan'),
                           ),
                         ),
                         const SizedBox(width: 8),
