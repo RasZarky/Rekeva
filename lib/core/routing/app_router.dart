@@ -15,6 +15,8 @@ import '../../features/search/view/vehicle_search_screen.dart';
 import '../../features/search/view/complex_vehicle_selection_screen.dart';
 import '../../features/search/view/luxury_handoff_screen.dart';
 import '../../features/booking/view/returning_summary_screen.dart';
+import '../../features/pink_slip/view/pink_slip_source_screen.dart';
+import '../../features/pink_slip/view/pink_slip_confirm_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -35,6 +37,8 @@ class AppRouter {
       GoRoute(path: '/scan-tips', builder: (context, state) => const ScanTipsScreen()),
       GoRoute(path: '/vehicle-search', builder: (context, state) => const VehicleSearchScreen()),
       GoRoute(path: '/returning-summary', builder: (context, state) => const ReturningSummaryScreen()),
+      GoRoute(path: '/pink-slip-source', builder: (context, state) => const PinkSlipSourceScreen()),
+      GoRoute(path: '/pink-slip-confirm', builder: (context, state) => const PinkSlipConfirmScreen()),
       GoRoute(
         path: '/complex-vehicle-selection',
         builder: (context, state) => ComplexVehicleSelectionScreen(

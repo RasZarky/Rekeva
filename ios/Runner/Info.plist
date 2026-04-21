@@ -25,7 +25,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We need camera access to scan your vehicle's VIN from the door jamb sticker to ensure the correct tire fitment.</string>
+	<string>We need camera access to scan your vehicle's VIN or take a photo of your pink slip to ensure correct tire fitment.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to let you upload a photo or screenshot of your pink slip for vehicle verification.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

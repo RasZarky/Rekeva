@@ -104,9 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: HomeActionTile(
                             icon: '📄',
                             label: 'Pink slip',
-                            onTap: () {
-                              // Pink slip logic
-                            },
+                            onTap: () => context.push('/pink-slip-source'),
                           ),
                         ),
                       ],
