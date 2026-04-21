@@ -20,6 +20,10 @@ import '../../features/pink_slip/view/pink_slip_confirm_screen.dart';
 import '../../features/vin/view/vin_entry_screen.dart';
 import '../../features/vin/view/vin_lookup_screen.dart';
 import '../../features/vin/view/staggered_fitment_screen.dart';
+import '../../features/booking/view/complete_set_intro_screen.dart';
+import '../../features/booking/view/wheel_selection_screen.dart';
+import '../../features/booking/view/complete_set_catalogue_screen.dart';
+import '../../features/booking/view/complete_set_breakdown_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -45,6 +49,10 @@ class AppRouter {
       GoRoute(path: '/vin-entry', builder: (context, state) => const VinEntryScreen()),
       GoRoute(path: '/vin-lookup', builder: (context, state) => const VinLookupScreen()),
       GoRoute(path: '/staggered-fitment', builder: (context, state) => const StaggeredFitmentScreen()),
+      GoRoute(path: '/complete-set-intro', builder: (context, state) => const CompleteSetIntroScreen()),
+      GoRoute(path: '/wheel-selection', builder: (context, state) => const WheelSelectionScreen()),
+      GoRoute(path: '/complete-set-catalogue', builder: (context, state) => const CompleteSetCatalogueScreen()),
+      GoRoute(path: '/complete-set-breakdown', builder: (context, state) => const CompleteSetBreakdownScreen()),
       GoRoute(
         path: '/complex-vehicle-selection',
         builder: (context, state) => ComplexVehicleSelectionScreen(

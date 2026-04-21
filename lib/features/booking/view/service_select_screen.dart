@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/primary_button.dart';
+import '../bloc/booking_bloc.dart';
 import '../widgets/service_card.dart';
 
 class ServiceSelectScreen extends StatelessWidget {
@@ -53,8 +55,8 @@ class ServiceSelectScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: const [
-                      ServiceCard(
+                    children: [
+                      const ServiceCard(
                         icon: '❄️',
                         title: 'Seasonal Swap',
                         desc: 'Swap to winters. Or back to summers.',
@@ -63,8 +65,8 @@ class ServiceSelectScreen extends StatelessWidget {
                         isPopular: true,
                         includes: ['Dismount', 'Mount', 'Balance ×4', 'TPMS reset'],
                       ),
-                      SizedBox(height: 10),
-                      ServiceCard(
+                      const SizedBox(height: 10),
+                      const ServiceCard(
                         icon: '⚙️',
                         title: 'Fit My Tires',
                         desc: 'You\'ve got tires. We\'ll fit them.',
@@ -72,8 +74,8 @@ class ServiceSelectScreen extends StatelessWidget {
                         priceSuffix: '/tire',
                         time: '60–90 min',
                       ),
-                      SizedBox(height: 10),
-                      ServiceCard(
+                      const SizedBox(height: 10),
+                      const ServiceCard(
                         icon: '🛒',
                         title: 'New Tires + Install',
                         desc: 'We\'ll help you pick the right tires and fit them same day',
@@ -111,10 +113,16 @@ class ServiceSelectScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
-                      decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(99)),
-                      child: const Text('Add a pair →', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: CupertinoColors.black)),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<BookingBloc>().setBookingType('complete_set');
+                        context.push('/complete-set-intro');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
+                        decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(99)),
+                        child: const Text('Add a pair →', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: CupertinoColors.black)),
+                      ),
                     ),
                   ],
                 ),
