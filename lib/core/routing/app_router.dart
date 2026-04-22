@@ -24,6 +24,15 @@ import '../../features/booking/view/complete_set_intro_screen.dart';
 import '../../features/booking/view/wheel_selection_screen.dart';
 import '../../features/booking/view/complete_set_catalogue_screen.dart';
 import '../../features/booking/view/complete_set_breakdown_screen.dart';
+import '../../features/booking/view/shop_profile_screen.dart';
+import '../../features/booking/view/time_selection_screen.dart';
+import '../../features/booking/view/phone_number_screen.dart';
+import '../../features/booking/view/otp_verification_screen.dart';
+import '../../features/booking/view/guest_checkout_screen.dart';
+import '../../features/booking/view/returning_checkout_screen.dart';
+import '../../features/booking/view/payment_processing_screen.dart';
+import '../../features/booking/view/payment_failed_screen.dart';
+import '../../features/booking/view/booking_expectations_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -53,6 +62,25 @@ class AppRouter {
       GoRoute(path: '/wheel-selection', builder: (context, state) => const WheelSelectionScreen()),
       GoRoute(path: '/complete-set-catalogue', builder: (context, state) => const CompleteSetCatalogueScreen()),
       GoRoute(path: '/complete-set-breakdown', builder: (context, state) => const CompleteSetBreakdownScreen()),
+      GoRoute(path: '/phone-number', builder: (context, state) => const PhoneNumberScreen()),
+      GoRoute(path: '/otp-verification', builder: (context, state) => const OtpVerificationScreen()),
+      GoRoute(path: '/guest-checkout', builder: (context, state) => const GuestCheckoutScreen()),
+      GoRoute(path: '/returning-checkout', builder: (context, state) => const ReturningCheckoutScreen()),
+      GoRoute(path: '/payment-processing', builder: (context, state) => const PaymentProcessingScreen()),
+      GoRoute(path: '/payment-failed', builder: (context, state) => const PaymentFailedScreen()),
+      GoRoute(path: '/booking-expectations', builder: (context, state) => const BookingExpectationsScreen()),
+      GoRoute(
+        path: '/shop-profile',
+        builder: (context, state) => ShopProfileScreen(
+          shopName: state.extra as String? ?? 'ProTire Mississauga',
+        ),
+      ),
+      GoRoute(
+        path: '/time-selection',
+        builder: (context, state) => TimeSelectionScreen(
+          shopName: state.extra as String? ?? 'ProTire Mississauga',
+        ),
+      ),
       GoRoute(
         path: '/complex-vehicle-selection',
         builder: (context, state) => ComplexVehicleSelectionScreen(

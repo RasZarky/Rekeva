@@ -118,7 +118,7 @@ class ShopListScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              PrimaryButton(text: 'Book this shop →', onPressed: () => context.push('/checkout')),
+              PrimaryButton(text: 'Book this shop →', onPressed: () => context.push('/shop-profile')),
             ],
           ),
         ),
@@ -188,7 +188,10 @@ class _ShopCard extends StatelessWidget {
       builder: (context, state) {
         final isSelected = state.shop == name;
         return GestureDetector(
-          onTap: () => context.read<BookingBloc>().setShop(name),
+          onTap: () {
+            context.read<BookingBloc>().setShop(name);
+            context.push('/shop-profile', extra: name);
+          },
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(

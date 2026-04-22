@@ -7,6 +7,7 @@ class AppColors {
   static const Color surface = Color(0xFF161616);
   static const Color surfaceLight = Color(0xFF1E1E1E);
   static const Color border = Color(0x12FFFFFF);
+  static const Color borderMid = Color(0x24FFFFFF);
   static const Color textPrimary = CupertinoColors.white;
   static const Color textSecondary = Color(0x99FFFFFF);
   static const Color textMuted = Color(0x4DFFFFFF);
